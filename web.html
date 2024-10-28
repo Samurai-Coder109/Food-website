@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraveHub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-top: 80px; /* Space to avoid overlap with fixed navbar */
+        }
+
+        /* Top strap (navigation bar) styling */
+        .top-strap {
+            background-color: #d9534f;
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-strap .left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-weight: bold;
+        }
+
+        .top-strap .right {
+            display: flex;
+            align-items: center;
+        }
+
+        .top-strap .right a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+
+        .top-strap .right a:hover {
+            text-decoration: underline;
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+
+        /* Full-screen image section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('BG.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content img {
+            height: 150px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .hero-content .buttons {
+            margin-top: 20px;
+        }
+
+        .hero-content .buttons a {
+            background-color: #d9534f;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            margin: 0 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .hero-content .buttons a:hover {
+            background-color: #c9302c;
+        }
+
+        /* Menu section styling */
+        #menu {
+            padding: 40px;
+            background-color: #f8f8f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .menu-box {
+            width: 200px;
+            margin: 15px;
+            text-align: center;
+            border: 2px solid #d9534f;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .menu-box {
+                width: 150px;
+            }
+        }
+
+        /* Payment Section */
+        #delivery {
+            padding: 40px;
+            background-color: #f8f8f8;
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        #delivery h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Small images container */
+        .small-images {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        /* Blank image boxes */
+        .small-images img {
+            width: 100px; /* Moderate size */
+            height: 80px;
+            object-fit: cover;
+        }
+
+        /* Order Now Button */
+        .order-now-btn {
+            display: inline-block;
+            background-color: #d9534f;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .order-now-btn:hover {
+            background-color: #c9302c;
+        }
+
+        /* Why Choose Us section */
+        #why-us {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 40px 0;
+            background-color: #f8f8f8;
+        }
+
+        .why-box {
+            width: 250px;
+            height: 300px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 15px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+
+        .why-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .why-box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .why-box h3 {
+            font-size: 1.2rem;
+            color: #d9534f;
+            padding: 15px;
+            margin: 0;
+        }
+
+        /* Follow Us Section */
+        #follow-us {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            font-size: 24px; /* Adjust size as needed */
+            color: #d9534f; /* Change color as desired */
+            text-decoration: none; /* Remove underline */
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+        color: #c9302c; /* Color change on hover */
+        }
+
+        /* Footer Styling */
+        footer {
+        background-color: #d9534f;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        }
+
+        footer h2 {
+        margin: 0 0 10px;
+        }
+
+        footer p {
+        margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Strap (Navigation Bar) -->
+    <div class="top-strap">
+        <div class="left">
+            <span>WELCOME to CraveHub</span>
+            <div class="slogan">Satisfy Your Cravings: From Our Kitchen to Your Doorstep!</div>
+        </div>
+        <div class="right">
+            <a href="#menu">Explore Menu</a>
+            <a href="#delivery">Delivery & Payment</a>
+            <a href="#about">About Us</a>
+            <a href="#why-us">Why Us?</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <img src="cravehub.jpg" alt="CraveHub Logo">
+            <h1>Get Delicious Food Instantly at your Doorstep</h1>
+            <div class="buttons">
+                <a href="#menu">View Menu</a>
+                <a href="#order">Order Now</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Menu Section -->
+        <section id="menu">
+            <h2>Menu</h2>
+            <div class="menu-container">
+                <div class="menu-box">
+                    <img src="1st.webp" alt="Veg Starter">
+                    <h3>Veg Starter</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="2nd.webp" alt="Non-Veg Starter">
+                    <h3>Non-Veg Starter</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="3rd.jpg" alt="Soups">
+                    <h3>Soups</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="4th.jpg" alt="Salads">
+                    <h3>Salads</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="5th.webp" alt="Main Course">
+                    <h3>Main Course</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="6th.png" alt="Sea Foods">
+                    <h3>Sea Foods</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="7th.webp" alt="Noodles">
+                    <h3>Noodles</h3>
+                </div>
+                <div class="menu-box">
+                    <img src="8th.webp" alt="Sweets & Desserts">
+                    <h3>Sweets & Desserts</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Section -->
+        <section id="delivery">
+            <h2>Payment Options</h2>
+            <p>We offer a variety of secure and convenient payment options to make your ordering experience seamless. Choose from credit cards, debit cards, PayPal, and cash on delivery. Whether you prefer digital transactions or traditional methods, our payment options are designed to suit your needs and ensure a smooth checkout process.</p>
+            <div class="small-images">
+                <img src="creditcard.jpg" alt="Credit Card">
+                <img src="visa.png" alt="Visa">
+                <img src="master.png" alt="MasterCard">
+                <img src="paypal.png" alt="PayPal">
+                <img src="cod.jpg" alt="Cash on Delivery">
+            </div>
+            <a href="#order" class="order-now-btn">Order Now</a>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-us">
+            <h2>Why Choose Us</h2>
+            <div class="why-box">
+                <img src="fresh.png" alt="Fresh Ingredients">
+                <h3>Fresh & Quality Ingredients</h3>
+            </div>
+            <div class="why-box">
+                <img src="wide.jpg" alt="Variety of Options">
+                <h3>Wide Variety of Options</h3>
+            </div>
+            <div class="why-box">
+                <img src="hygiene.png" alt="Hygiene & Safety">
+                <h3>Hygiene & Safety</h3>
+            </div>
+            <div class="why-box">
+                <img src="easy.png" alt="Easy Ordering Process">
+                <h3>Easy Ordering Process</h3>
+            </div>
+            <div class="why-box">
+                <img src="fast.png" alt="Fast Delivery">
+                <h3>Fast & Reliable Delivery</h3>
+            </div>
+            <div class="why-box">
+                <img src="coustomer.jpg" alt="Customer Service">
+                <h3>Customer-Centric Service</h3>
+            </div>
+        </section>
+
+        <section id="follow-us">
+            <h2>Follow Us</h2>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                <!-- Add more social media links as needed -->
+            </div>
+        </section>        
+    </div>
+    <!-- Footer Section -->
+    <footer>
+        <img src="cravehub.jpg" alt="CraveHub Logo" style="width: 100px; height: auto; margin-bottom: 10px;"> <!-- Adjust 'src' to your logo's path -->
+        <h2>CraveHub</h2>
+        <p>&copy; 2024 CraveHub. All rights reserved.</p>
+        <p>Contact: info@cravehub.com</p>
+        <p>Address: 123 Crave Street, Food City, FC 12345</p>
+        <p>This website is made and designed by Tanish Diwakar.</p>
+    </footer>
+</body>
+</html>
